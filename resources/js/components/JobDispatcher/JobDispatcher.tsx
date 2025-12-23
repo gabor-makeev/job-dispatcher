@@ -9,9 +9,9 @@ export default function JobDispatcher () {
 
 	useEchoPublic(
 		'notifications', 
-		'WeatherFound', 
-		({ weather }: {weather: string}) => {
-		setNotifications(prev => [weather, ...prev]);
+		'JobCompleted', 
+		({ message }: {message: string}) => {
+		setNotifications(prev => [message, ...prev]);
 	})
 
 	return (
