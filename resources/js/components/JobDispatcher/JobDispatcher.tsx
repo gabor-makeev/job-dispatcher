@@ -3,8 +3,9 @@ import Container from "./components/Container";
 import Events from "./components/Events";
 import Jobs from "./components/Jobs";
 import { useState } from "react";
+import { dndMonster } from "@/pages/welcome";
 
-export default function JobDispatcher () {
+export default function JobDispatcher ({ dndMonsters }: { dndMonsters: dndMonster[] }) {
 	const [notifications, setNotifications] = useState<string[]>([]);
 
 	useEchoPublic(
@@ -16,7 +17,7 @@ export default function JobDispatcher () {
 
 	return (
 		<Container>
-			<Jobs />
+			<Jobs dndMonsters={dndMonsters} />
 			<Events notifications={notifications} />
 		</Container>
 	);

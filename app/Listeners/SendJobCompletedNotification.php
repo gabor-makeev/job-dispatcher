@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\DndMonsterFound;
 use App\Events\JobCompleted;
 use App\Events\WeatherFound;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -20,7 +21,7 @@ class SendJobCompletedNotification
     /**
      * Handle the event.
      */
-    public function handle(WeatherFound $event): void
+    public function handle(WeatherFound|DndMonsterFound $event): void
     {
         $eventName = class_basename($event::class);
         $time = now()->format('d-m-Y H:i');

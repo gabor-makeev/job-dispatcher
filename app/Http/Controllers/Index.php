@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Http;
+use Inertia\Inertia;
+
+class Index extends Controller
+{
+    /**
+     * Handle the incoming request.
+     */
+    public function __invoke(Request $request)
+    {
+        $dndMonstersResponse = Http::get('https://www.dnd5eapi.co/api/2014/monsters')->collect();
+        $dndMonstersResponseFiltered = Arr::select($dndMonstersResponse['results'], ['index', 'name']);
+
+        return Inertia::render(
+            'welcome', 
+            [
+                'content' => [
+                    'dnd_monsters' => $dndMonstersResponseFiltered,
+                ]
+            ]
+        );
+    }
+}
