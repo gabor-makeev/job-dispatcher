@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dictionary;
 use App\Http\Controllers\Index;
 use App\Http\Controllers\Weather;
 use App\Http\Controllers\DndMonster;
@@ -14,3 +15,6 @@ Route::post('/weather', Weather::class)
 
 Route::post('/dnd-monster', DndMonster::class)
     ->name('dnd-monster');
+
+Route::post('/dictionary', Dictionary::class)
+    ->name('dictionary');
