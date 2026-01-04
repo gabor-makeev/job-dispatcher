@@ -1,4 +1,5 @@
 import JobDispatcher from '@/components/JobDispatcher';
+import { CompletedJob } from '@/types/completed-job';
 import { Head } from '@inertiajs/react';
 
 export interface dndMonster {
@@ -7,7 +8,8 @@ export interface dndMonster {
 }
 
 interface Content {
-    dnd_monsters: dndMonster[]
+    dnd_monsters: dndMonster[];
+    completed_jobs: CompletedJob[];
 }
 
 export default function Welcome({ content }: {content: Content}) {
@@ -17,7 +19,7 @@ export default function Welcome({ content }: {content: Content}) {
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
-            <JobDispatcher dndMonsters={content.dnd_monsters} />
+            <JobDispatcher dndMonsters={content.dnd_monsters} completedJobs={content.completed_jobs} />
         </>
     );
 }

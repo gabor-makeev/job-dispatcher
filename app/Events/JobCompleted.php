@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\CompletedJob;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -17,7 +18,7 @@ class JobCompleted implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(public string $message) {}
+    public function __construct(public CompletedJob $completedJob) {}
 
     /**
      * Get the channels the event should broadcast on.

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CompletedJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
@@ -14,6 +15,8 @@ class Index extends Controller
      */
     public function __invoke(Request $request)
     {
+        $completedJobs = CompletedJob::orderBy('created_at', 'desc')->get();
+
         $dndMonstersResponse = Http::get('https://www.dnd5eapi.co/api/2014/monsters')->collect();
         $dndMonstersResponseFiltered = Arr::select($dndMonstersResponse['results'], ['index', 'name']);
 
@@ -22,6 +25,7 @@ class Index extends Controller
             [
                 'content' => [
                     'dnd_monsters' => $dndMonstersResponseFiltered,
+                    'completed_jobs' => $completedJobs,
                 ]
             ]
         );

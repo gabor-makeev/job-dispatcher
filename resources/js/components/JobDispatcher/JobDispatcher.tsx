@@ -4,21 +4,22 @@ import Events from "./components/Events";
 import Jobs from "./components/Jobs";
 import { useState } from "react";
 import { dndMonster } from "@/pages/welcome";
+import { CompletedJob } from "@/types/completed-job";
 
-export default function JobDispatcher ({ dndMonsters }: { dndMonsters: dndMonster[] }) {
-	const [notifications, setNotifications] = useState<string[]>([]);
+export default function JobDispatcher ({ dndMonsters, completedJobs }: { dndMonsters: dndMonster[], completedJobs: CompletedJob[] }) {
+	const [completedJobsList, setCompletedJobsList] = useState<CompletedJob[]>(completedJobs);
 
 	useEchoPublic(
-		'notifications', 
-		'JobCompleted', 
-		({ message }: {message: string}) => {
-		setNotifications(prev => [message, ...prev]);
+		'notifications',
+		'JobCompleted',
+		({ completedJob }: { completedJob: CompletedJob }) => {
+			setCompletedJobsList((prev) => [completedJob, ...prev]);
 	})
 
 	return (
 		<Container>
 			<Jobs dndMonsters={dndMonsters} />
-			<Events notifications={notifications} />
+			<Events completedJobsList={completedJobsList} />
 		</Container>
 	);
 }
