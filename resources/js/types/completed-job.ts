@@ -4,6 +4,7 @@ export interface CompletedJobDTO {
 	message: string;
 	created_at: string;
 	updated_at: string;
+    database: 'a' | 'b';
 }
 
 export type CompletedJobView = Omit<CompletedJobDTO, 'created_at' | 'updated_at'> & {

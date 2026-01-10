@@ -15,7 +15,8 @@ class Index extends Controller
      */
     public function __invoke(Request $request)
     {
-        $completedJobs = CompletedJob::orderBy('created_at', 'desc')->get();
+        $completedJobsA = CompletedJob::on('mysql')->orderBy('created_at', 'desc')->get();
+        $completedJobsB = CompletedJob::on('mysql_2')->orderBy('created_at', 'desc')->get();
 
         $dndMonstersResponse = Http::get('https://www.dnd5eapi.co/api/2014/monsters')->collect();
         $dndMonstersResponseFiltered = Arr::select($dndMonstersResponse['results'], ['index', 'name']);
@@ -25,7 +26,10 @@ class Index extends Controller
             [
                 'content' => [
                     'dnd_monsters' => $dndMonstersResponseFiltered,
-                    'completed_jobs' => $completedJobs,
+                    'completed_jobs' => [
+                        'a' => $completedJobsA,
+                        'b' => $completedJobsB
+                    ],
                 ]
             ]
         );

@@ -9,7 +9,10 @@ export interface dndMonster {
 
 interface Content {
     dnd_monsters: dndMonster[];
-    completed_jobs: CompletedJobDTO[];
+    completed_jobs: {
+        a: CompletedJobDTO[];
+        b: CompletedJobDTO[];
+    };
 }
 
 export default function Welcome({ content }: {content: Content}) {
